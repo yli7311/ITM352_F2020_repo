@@ -1,0 +1,28 @@
+h1, h2 {
+    font-family: "Oswald", sans;
+}
+
+body {
+    font-family: "Open Sans", sans;
+    color: darkblue;
+    margin: 10px 50px 10px 50px;
+    width: 950px;
+    background-color: ivory;
+}
+
+img {
+    float: left;
+    margin-right: 10 px;
+}
+
+.column {
+    float:left;
+    width: 300px;
+    margin: 0px 8px 0px 8px
+}
+
+.nv {
+    text-align: center;
+    list-style-type: none;
+    column-count: 4;
+}
