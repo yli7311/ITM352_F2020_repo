@@ -1,0 +1,36 @@
+/* General */ 
+header {     
+    text-align: center;
+}
+
+/* Typography */ 
+h2 {
+    text-align: center;
+}
+
+body {
+    /* block styling */  
+    width: 800px; 
+    margin: 0 auto;
+}
+
+main {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    
+    border: 5px solid black;
+    display: flex;
+
+    background: url(./images/phone_globe.jpg) no-repeat; 
+}
+
+img {
+    width: 200px;
+    height: 200px;
+}
+
+footer {
+    text-align: center;
+}
+
