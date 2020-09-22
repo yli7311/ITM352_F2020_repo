@@ -7,13 +7,24 @@
 <body>
     Hello
     <script>
-        var first_name = "Yi";
-        var last_name = "Li";
-        var full_name = first_name + " " + last_name
+        var myfname = "Yi";
+        var mymname = "Rick";
+        var mylname = "Li";
+        var fullname = myfname + " " + mymname + " " + mylname;
+        var formatname = fullname + "<br>" + myfname[0] + "." + " " + mylname[0] + "."
+        var formatname2 = "<strong>" + myfname + "</strong><br><i>" + mymname + "</i><br><div style='font-size:100px'>" + mylname + "</div>";
+        document.write(formatname2);
     </script>
     <div id="ageDiv"></div>
+    <div id="taxbill"></div>
+    <script>
+        var price = 50;
+        var tax = 0.0413*price;
+        var bill = tax.toFixed(2);
+        document.getElementById("taxbill").innerHTML = "The tax on Yi’s bill is " + bill + ".";
+    </script>
 </body>
-</html>
+</html> 
 <script>
     var numkids = 0;
     var age = 20;
