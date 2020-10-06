@@ -4,7 +4,7 @@ while(age_count < age) {
     if( (age_count >= age/2) && (age_count < (3/4)*age) ) {
         console.log(`No age zone!`);
         process.exit();
-        console.log(`I'm old!`);
+        //console.log(`I'm old!`);
         //break;
     }
     else { 
