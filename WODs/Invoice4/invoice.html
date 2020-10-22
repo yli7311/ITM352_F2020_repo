@@ -1,0 +1,127 @@
+<script>
+  function generate_item_rows(products_quantities_array) {
+    for (i = 0; i < products_quantities_array.length; i++) {
+      qty = products_quantities_array[i];
+      errs = isNonNegInt(qty, true);
+      if(qty == 0) {
+        continue;
+      }
+      if(errs.length == 0) {
+        extended_price = qty * products[i].price;
+        subtptal += extended_price;
+      } else {
+        qty = `<span style="color:red;">${qty}><br>${errs.join("<br>")}</span>`;
+      }
+      extended_price = products_quantities_array[i] * products[i].price;
+      subtotal += extended_price;
+      document.write(`
+    <tr>
+       <td width="43%">${products[i].brand}</td>
+       <td align="center" width="11%">${qty}</td>
+       <td width="13%">\$${products[i].price}</td>
+       <td width="54%">\$${extended_price}</td>
+    </tr>`);
+    }
+  }
+
+  function isNonNegInt(string_to_check, returnErrors=false) {
+    errors = []; // assume no errors at first
+    if (Number(string_to_check) != string_to_check) errors.push('Not a number!');
+    if (string_to_check < 0) errors.push('Negative value!');
+    if (parseInt(string_to_check) != string_to_check) errors.push('Not an integer!');
+
+    return returnErrors ? errors : (errors.length == 0);
+  }
+
+  var products = [{
+    brand: "HTC",
+    price: "$40.00",
+    image: "http://dport96.github.io/ITM352/morea/080.flow-control-II/HTC.jpg"
+  },
+  {
+    brand: "Apple",
+    price: "$75.00",
+    image: "http://dport96.github.io/ITM352/morea/080.flow-control-II/iphone-3gs.jpg"
+  },
+
+  {
+    brand: "Nokia",
+    price: "$35.00",
+    image: "http://dport96.github.io/ITM352/morea/080.flow-control-II/Nokia.jpg"
+  },
+
+  {
+    brand: "Samsung",
+    price: "$45.00",
+    image: "http://dport96.github.io/ITM352/morea/080.flow-control-II/Samsung.jpg"
+  },
+
+  {
+    brand: "Blackberry",
+    price: "$10.00",
+    image: "http://dport96.github.io/ITM352/morea/080.flow-control-II/Blackberry.jpg"
+  }];
+
+  var quantities = [0, 1, 2, 3, 4]
+
+  subtotal = 0;
+
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <table border="2">
+      <tbody>
+        <script>
+          document.write(`
+            <tr>
+              <th style="text-align: center;" width="43%">Item</th>
+              <th style="text-align: center;" width="11%">quantity</th>
+              <th style="text-align: center;" width="13%">price</th>
+              <th style="text-align: center;" width="54%">extended price</th>
+            </tr>`)
+          generate_item_rows(quantities[i]);
+          //Tax
+          var taxrate = 0.0575;
+          var tax = taxrate * subtotal;
+
+          //Grand total
+          var gtot = subtotal + tax;
+        </script>
+        <tr>
+          <td colspan="4" width="100%">&nbsp;</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;" colspan="3" width="67%">Sub-total</td>
+          <td width="54%">$
+            <script>document.write(subtotal);</script>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;" colspan="3" width="67%"><span style="font-family: arial;">Tax @ 5.75%</span>
+          </td>
+          <td width="54%">$
+            <script>document.write(tax.toFixed(2));</script>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;" colspan="3" width="67%"><strong>Total</strong></td>
+          <td width="54%"><strong>$
+              <script>document.write(gtot.toFixed(2));</script></strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</body>
+
+</html>
