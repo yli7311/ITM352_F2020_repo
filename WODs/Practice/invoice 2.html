@@ -1,68 +1,67 @@
 <script>
-  function generate_item_rows(products_quantities_array) {
-    for (i = 0; i < products_quantities_array.length; i++) {
-      qty = products_quantities_array[i];
+  function generate_item_rows(product_quantities_array) {
+    for (i = 0; i < product_quantities_array.length; i++) {
+      qty = product_quantities_array[i];
       errs = isNonNegInt(qty, true);
       if(qty == 0) {
         continue;
       }
       if(errs.length == 0) {
-        extended_price = qty * products[i].price;
-        subtptal += extended_price;
+        extended_price = products[i].price * qty;
+        subtotal = subtotal + extended_price;
       } else {
-        qty = `<span style="color:red;">${qty}><br>${errs.join("<br>")}</span>`;
+        qty = `${qty}<br><span style="color:red;">${errs.join("<br>")}</span>`;
+        extended_price = 0;
       }
-      extended_price = products_quantities_array[i] * products[i].price;
-      subtotal += extended_price;
       document.write(`
-    <tr>
-       <td width="43%">${products[i].brand}</td>
-       <td align="center" width="11%">${qty}</td>
-       <td width="13%">\$${products[i].price}</td>
-       <td width="54%">\$${extended_price}</td>
-    </tr>`);
+      <tr>
+        <td width="43%">${products[i].brand}</td>
+        <td align="center" width="11%">${qty}</td>
+        <td width="13%">\$${products[i].price}</td>
+        <td width="54%">\$${extended_price}</td>
+      </tr>`)
     }
   }
 
   function isNonNegInt(string_to_check, returnErrors=false) {
     errors = []; // assume no errors at first
-    if (Number(string_to_check) != string_to_check) errors.push('Not a number!');
-    if (string_to_check < 0) errors.push('Negative value!');
-    if (parseInt(string_to_check) != string_to_check) errors.push('Not an integer!');
-
+    if (Number(string_to_check) != string_to_check) errors.push('Not a number!'); // Check if string is a number value
+    if (string_to_check < 0) errors.push('Negative value!'); // Check if it is non-negative
+    if (parseInt(string_to_check) != string_to_check) errors.push('Not an integer!'); // Check that it is an integer
     return returnErrors ? errors : (errors.length == 0);
-  }
+}
 
-  var products = [{
+  // Product Data
+  products = [{
     brand: "HTC",
-    price: "$40.00",
+    price: 40.00,
     image: "http://dport96.github.io/ITM352/morea/080.flow-control-II/HTC.jpg"
   },
   {
     brand: "Apple",
-    price: "$75.00",
+    price: 75.00,
     image: "http://dport96.github.io/ITM352/morea/080.flow-control-II/iphone-3gs.jpg"
   },
 
   {
     brand: "Nokia",
-    price: "$35.00",
+    price: 35.00,
     image: "http://dport96.github.io/ITM352/morea/080.flow-control-II/Nokia.jpg"
   },
 
   {
     brand: "Samsung",
-    price: "$45.00",
+    price: 45.00,
     image: "http://dport96.github.io/ITM352/morea/080.flow-control-II/Samsung.jpg"
   },
 
   {
     brand: "Blackberry",
-    price: "$10.00",
+    price: 10.00,
     image: "http://dport96.github.io/ITM352/morea/080.flow-control-II/Blackberry.jpg"
   }];
 
-  var quantities = [0, 1, 2, 3, 4]
+  var quantities = [0.5, -1, 5, 0, "lol"];
 
   subtotal = 0;
 
@@ -89,10 +88,19 @@
               <th style="text-align: center;" width="13%">price</th>
               <th style="text-align: center;" width="54%">extended price</th>
             </tr>`)
-          generate_item_rows(quantities[i]);
+            generate_item_rows(quantities);
           //Tax
           var taxrate = 0.0575;
           var tax = taxrate * subtotal;
+
+          //Shipping
+          var shipping = 2;
+          if(subtotal >= 100) {
+            shipping = 0.05*subtotal;
+          } 
+          else if(subtotal >= 50) {
+            shipping = 5;
+          }
 
           //Grand total
           var gtot = subtotal + tax;
@@ -111,6 +119,13 @@
           </td>
           <td width="54%">$
             <script>document.write(tax.toFixed(2));</script>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;" colspan="3" width="67%"><span style="font-family: arial;">Shipping</span>
+          </td>
+          <td width="54%">$
+            <script>document.write(shipping.toFixed(2));</script>
           </td>
         </tr>
         <tr>

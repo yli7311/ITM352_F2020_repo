@@ -44,8 +44,17 @@ var subtot = ep1+ep2+ep3+ep4+ep5;
 var taxrate = 0.0575;
 var tax = taxrate*subtot;
 
+//Shipping
+var shipping = 2
+if(subtot >= 100) {
+  shipping = 0.05*subtot;
+}
+else if(subtot >= 50) {
+  shipping = 5;
+}
+
 //Grand total
-var gtot = subtot+tax;
+var gtot = subtot+tax+shipping;
 </script>
 
 <!DOCTYPE html>
@@ -109,6 +118,10 @@ var gtot = subtot+tax;
             <tr>
               <td style="text-align: center;" colspan="3" width="67%"><span style="font-family: arial;">Tax @ 5.75%</span></td>
               <td width="54%">$<script>document.write(tax.toFixed(2));</script></td>
+            </tr>
+            <tr>
+              <td style="text-align: center;" colspan="3" width="67%">Shipping</td>
+              <td width="54%">$<script>document.write(shipping.toFixed(2));</script></td>
             </tr>
             <tr>
               <td style="text-align: center;" colspan="3" width="67%"><strong>Total</strong></td>
