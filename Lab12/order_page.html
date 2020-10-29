@@ -10,7 +10,7 @@
             if (Number(val) != val) errors.push('Not a number!');
             if (val < 0) errors.push('Negative value!');
             if (parseInt(val) != val) errors.push('Not an integer!');
-            return returnErrors ? errors : (errors.length == 0);
+            return returnErrors ? errors : ((errors.length > 0) ? false : true);
         }
 
         function checkQuantityTextbox() {
