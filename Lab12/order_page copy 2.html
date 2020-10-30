@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        let params = (new URL(document.location)).searchParams;
+
+        function isNonNegInt(val, returnErrors = false) {
+            errors = [];
+            if (Number(val) != val) {
+                errors.push('Not a number!');
+            }
+            else {
+                if (val < 0) errors.push('Negative value!');
+                if (parseInt(val) != val) errors.push('Not an integer!');
+            }
+            return returnErrors ? errors : ((errors.length > 0) ? false : true);
+        }
+
+        function checkQuantityTextbox() {
+            quantity_textbox_message.innerHTML = isNonNegInt(quantity_textbox.value, true).join(" ");
+        }
+
+        function displayPurchase() {
+            purchase_qty = GET["quantity_textbox"];
+            if(isNonNegInt(purchase_qty)) {
+                document.getElementById('the_body').innerHTML= `Thank for you for ordering ${purchase_qty} things!`;
+            } else {
+                checkQuantityTextbox();
+            }
+        }
+
+        if(typeof GET['submit_button'] != 'undefined') {
+                displayPurchase(); 
+                window.stop();
+        }
+    </script>
+
+</head>
+
+<body id='the_body'>
+    <form name="quantity_form" action="" method="GET">
+        <label for="quantity_textbox">Item Desired:</label>
+        <select id="quantity_textbox">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+        <span id='quantity_textbox_message'>Choose Item</span><br>
+        <input type="submit" name="submit_button" value="Purchase" >
+    </form>
+</body>
+
+</html>
