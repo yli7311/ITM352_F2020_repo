@@ -4,8 +4,8 @@ var express = require('express');
 var app = express();
 var myParser = require("body-parser");
 var fs = require('fs');
-var data = require('./static/product.js');
-const QueryString = require('qs');
+var data = require('./static/products.js');
+var QueryString = require('qs');
 var products = data.products;
 
 //records request in the console
@@ -15,6 +15,7 @@ app.all('*', function (request, response, next) {
 });
 
 app.use(myParser.urlencoded({ extended: true }));
+
 app.post("/process_form", function (request, response) {
     let POST = request.body;
     
