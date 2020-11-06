@@ -28,7 +28,6 @@
             for (i = 0; i < products.length; i++) {
                 if (params.has(`quantity${i}`)) {
                     a_qty = params.get(`quantity${i}`);
-                    // make textboxes sticky in case of invalid data
                     product_selection_form[`quantity${i}`].value = a_qty;
                     total_qty += a_qty; 
                     if(!isNonNegInt(a_qty)) {
@@ -64,7 +63,7 @@
         <h1>Surprised Pokemon Buttons</h1>
     </header>
     <div>
-        <form name="product_selection_form" action="" method="GET">
+        <form name="product_selection_form" action="/process_form" method="POST">
         <main>
             <script>
                 // Item set
