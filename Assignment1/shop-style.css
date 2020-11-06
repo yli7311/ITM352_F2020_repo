@@ -1,0 +1,192 @@
+ /* Code referenced from SmartPhoneProducts */
+ 
+  /* General */
+ 
+  html {
+    font-family: 'Quicksand', sans-serif;
+    background-color: white;
+    font-size: 10px;
+  }
+  
+  body {
+    width: 800px;
+    margin: 0 auto;
+  }
+  
+  /* Typography */
+  
+  h1, h2 {
+    
+    font-family: 'Quicksand';
+    margin: 0;
+    
+    text-align: center;
+  }
+  
+  
+  h1 {
+    font-size: 5rem;
+    background-size: 48px 48px;
+    background-blend-mode: lighten;
+  }
+  
+  h2 {
+    font-size: 20px;
+    text-align: center;
+    position: relative;
+    z-index: 3000;
+    line-height: 2rem;
+    padding-top: 0.3rem;
+  }
+  
+  p {
+    font-size: 1.5rem;
+    font-family: 'Quicksand';
+    text-align: center;
+  }
+
+  label, input {
+    font-size: 1.25rem;
+    font-family: 'Quicksand';
+    display: inline;
+    margin-bottom: 20px;
+  }
+
+  .purchase_submit {
+    font-size: 1.75rem;
+    color: white;
+  }
+
+  table p {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: bold;
+  }
+  
+  .grand_total {
+    text-align: left;
+  }
+
+  .welcome {
+    text-align: center;
+    font-size: 30px;
+  }
+
+  .gotostore {
+    font-family: 'Quicksand';
+    font-size: 1.75rem;
+    color: white;
+  }
+  
+  /* block styling */
+  
+  header, main, footer {
+    padding: 40px;
+    padding-top: 50px;
+  }
+  
+  header {
+    border: 0;
+    border-bottom: 2px solid black;
+  }
+  
+  footer {
+    border: 0;
+    border-top: 2px solid black;
+  }
+  
+  footer h1 {
+    font-size: 3rem;
+  }
+  
+  table {
+    width: 100%;
+    margin: 20px;
+    margin-bottom: 30px;
+  }
+
+  .welcome {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  /*  Form styling */
+  
+  main {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+  }
+
+  /* Styling the products */
+  
+  .item_set {
+    width:50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 50px;
+    position: relative;
+    height: 430px;
+  }
+  
+  .item {
+    width: 20%;
+    margin-bottom: 20px;
+    position: relative;
+    align-items: center;
+    display: block;
+
+  }
+  
+  section p {
+    color: white;
+    background: black;
+    width: 50px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    z-index: 2000;
+    position: absolute;
+    top: 0px;
+  }
+
+  .item_set img {
+    width: 100%; 
+    display: block;
+    position: relative;
+    bottom: 0px;
+    border-radius: 5px;
+  }
+  
+  .item img {
+    width: 100%; 
+    display: block;
+    position: relative;
+    box-align: center;
+    bottom: 0px;
+    border-radius: 5px;
+  }
+
+  .purchase_submit {
+    width: 200px;
+    padding: 15px;
+    background-color: black;
+    border: 0;
+  }
+
+  input {
+    width: 100%;
+    margin-top: 5px;
+  }
+
+  .quantity_input {
+    justify-content: center;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+
+  .gotostore {
+    width: 200px;
+    padding: 15px;
+    background-color: black;
+    border: 0;
+  }
