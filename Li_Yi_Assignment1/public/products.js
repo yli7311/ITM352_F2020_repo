@@ -1,4 +1,4 @@
-products = [
+var products = [
   {
     "name": "Full Button Set",
     "price": 6.00,
@@ -27,3 +27,8 @@ products = [
     "image": "https://pbs.twimg.com/media/D3JW_tdVAAA-Wen?format=png&name=small"
   }
 ];
+
+//export data if type of module is defined 
+if(typeof module != 'undefined') {
+  module.exports.products = products;
+}

@@ -1,14 +1,12 @@
 //codes from lab 13 
 
-var express = require('express');
-var app = express();
-var myParser = require("body-parser");
-var fs = require('fs');
-var data = require('./static/products.js');
-var QueryString = require('qs');
-var products = data.products;
+var express = require('express'); //express module
+var app = express(); //set module variable
+var myParser = require("body-parser"); //body parser module
+var products = require('./public/products.js'); //loads products.js file and sets variable
+var querystring = require('qs'); 
 
-//records request in the console
+//records request in the console or all request methods
 app.all('*', function (request, response, next) {
     console.log(request.method + ' to path ' + request.path);
     next();
@@ -21,18 +19,31 @@ app.post("/process_form", function (request, response) {
     
     if (typeof POST['purchase_submit'] != 'undefined') {
         for (var i = 0; i < products.length; i++) {
+            var hasvalidquantities = true; 
+            var hasquantities = false;
             var qty = POST[`quantity${i}`];
-            if (isNonNegInt(qty)) {
-                var contents = fs.readFileSync('./views/display_quantity_template.view', 'utf8');
-                const submission = QueryString.stringify(POST);
-                response.redirect("./invoice.html"+submission)
-            } else {
+            hasquantities=hasquantities || qty>0;
+            hasvalidquantities=hasvalidquantities && isNonNegInt(qty);
+        }
+        const stringified = querystring.stringify(POST);
+        if (hasvalidquantities && hasquantities) {
+            response.redirect("./invoice.html?"+stringified);
+        } else {
                 response.send(`Your quantity is invalid!`);
             }
-        }
+        
     }
 });
 
-app.use(express.static('./static'));
+function isNonNegInt(q, returnErrors = false) {
+        errors = []; // assume that quantity data is valid//
+        if (q == "") { q = 0; }
+        if (Number(q) != q) errors.push('Not a number!'); //check if value is a number//
+        if (q < 0) errors.push('Negative value!'); //check if value is a positive number//
+        if (parseInt(q) != q) errors.push('Not an integer!'); //check if value is a whole number//
+        return returnErrors ? errors : (errors.length == 0);
+    }
+
+app.use(express.static('./public'));
 
 var listener = app.listen(8080, () => { console.log('server started listening on port ' + listener.address().port) });
