@@ -23,8 +23,8 @@ app.post("/process_form", function (request, response) {
             var hasvalidquantities = true; 
             var hasquantities = false;
             var qty = POST[`quantity${i}`];
-            hasquantities=hasquantities || qty>0;
-            hasvalidquantities=hasvalidquantities && isNonNegInt(qty);
+            hasquantities=hasquantities || qty>0; //if either is true
+            hasvalidquantities=hasvalidquantities && isNonNegInt(qty); //both must be true 
         }
         const stringified = querystring.stringify(POST);
         if (hasvalidquantities && hasquantities) {
