@@ -14,6 +14,7 @@ app.all('*', function (request, response, next) {
 
 app.use(myParser.urlencoded({ extended: true }));
 
+//checks for valid submission, redirect to invoice page with submitted data if true, give error message if it is not
 app.post("/process_form", function (request, response) {
     let POST = request.body;
     
