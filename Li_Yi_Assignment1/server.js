@@ -1,9 +1,9 @@
-//codes from lab 13 
+//codes from lab 13 unless otherwise stated
 
 var express = require('express'); //express module
 var app = express(); //set module variable
 var myParser = require("body-parser"); //body parser module
-var products = require('./public/products.js'); //loads products.js file and sets variable
+var products = require('./public/products.js').products; //loads products.js file and sets variable
 var querystring = require('qs'); 
 
 //records request in the console or all request methods
@@ -18,17 +18,27 @@ app.use(myParser.urlencoded({ extended: true }));
 app.post("/process_form", function (request, response) {
     let POST = request.body;
     
+    //referenced from Meghan Nagai 
     if (typeof POST['purchase_submit'] != 'undefined') {
+        var hasvalidquantities = true; //asume quantity is valid
+        var hasquantities = false; //assume no quantities
         for (var i = 0; i < products.length; i++) {
             var qty = POST[`quantity${i}`];
-            hasquantities=hasquantities || qty>0; //if either is true
-            hasvalidquantities=hasvalidquantities && isNonNegInt(qty); //both must be true 
+            if (qty > 0) {
+                hasquantities = true;
+            } //has quantity if qty is > 0
+            if (isNonNegInt(qty) == false) {
+                hasvalidquantities = false;
+            } //not valid if the quantity is negative
         }
+        console.log(qty);
+        console.log(products.length);
         const stringified = querystring.stringify(POST);
-        if (hasvalidquantities && hasquantities) {
+        if (hasvalidquantities == true && hasquantities == true) {
             response.redirect("./invoice.html?"+stringified);
         } else {
-                response.send(`Your quantity is invalid!`);
+                error_message =`<script> alert('Your quantity is invalid!'); window.history.go(-1);</script>`;
+                response.send(error_message);
             }
         
     }
@@ -43,6 +53,6 @@ function isNonNegInt(q, returnErrors = false) {
         return returnErrors ? errors : (errors.length == 0);
     }
 
-app.use(express.static('./public'));
+app.use(express.static('./public')); //references public folder
 
-var listener = app.listen(8080, () => { console.log('server started listening on port ' + listener.address().port) });
+var listener = app.listen(8080, () => { console.log('server started listening on port ' + listener.address().port) }); 
