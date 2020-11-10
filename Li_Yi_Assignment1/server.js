@@ -20,8 +20,6 @@ app.post("/process_form", function (request, response) {
     
     if (typeof POST['purchase_submit'] != 'undefined') {
         for (var i = 0; i < products.length; i++) {
-            var hasvalidquantities = true; 
-            var hasquantities = false;
             var qty = POST[`quantity${i}`];
             hasquantities=hasquantities || qty>0; //if either is true
             hasvalidquantities=hasvalidquantities && isNonNegInt(qty); //both must be true 
