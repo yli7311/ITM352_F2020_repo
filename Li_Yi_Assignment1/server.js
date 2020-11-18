@@ -31,14 +31,12 @@ app.post("/process_form", function (request, response) {
                 hasvalidquantities = false;
             } //not valid if the quantity is negative
         }
-        console.log(qty);
-        console.log(products.length);
-        const stringified = querystring.stringify(POST);
+        const stringified = querystring.stringify(POST); //stringify the the post data 
         if (hasvalidquantities == true && hasquantities == true) {
-            response.redirect("./invoice.html?"+stringified);
+            response.redirect("./invoice.html?"+stringified); //redirect to invoice page with entered data if quantities are valid
         } else {
                 error_message =`<script> alert('Your quantity is invalid!'); window.history.go(-1);</script>`;
-                response.send(error_message);
+                response.send(error_message); //send error message if quantity is invalid
             }
         
     }
@@ -55,4 +53,4 @@ function isNonNegInt(q, returnErrors = false) {
 
 app.use(express.static('./public')); //references public folder
 
-var listener = app.listen(8080, () => { console.log('server started listening on port ' + listener.address().port) }); 
+var listener = app.listen(8080, () => { console.log('server started listening on port ' + listener.address().port) }); //listening on port 8080
