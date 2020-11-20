@@ -6,6 +6,14 @@ var myParser = require("body-parser"); //body parser module
 var products = require('./static/products.js').products; //loads products.js file and sets variable
 var querystring = require('qs'); 
 const fs = require('fs'); //loads fs module
+const user_data_filename = 'user_data.json';
+var user_data = {
+    "user_qty_str" : "",
+    "user_name" : "guest"
+}
+
+var data = fs.readFileSync(user_data_filename, 'utf-8');
+users_reg_data = JSON.parse(data);
 
 app.use(myParser.urlencoded({ extended: true }));
 
@@ -28,12 +36,12 @@ app.post("/process_form", function (request, response) {
         }
         const stringified = querystring.stringify(POST); //stringify the the post data 
         if (hasvalidquantities == true && hasquantities == true) {
+            user_data.user_qty_str = stringified;
             response.redirect("./login.html?"+stringified); //redirect to invoice page with entered data if quantities are valid
         } else {
                 error_message =`<script> alert('Your quantity is invalid!'); window.history.go(-1);</script>`;
                 response.send(error_message); //send error message if quantity is invalid
-            }
-        
+        }
     }
 });
 
@@ -50,17 +58,14 @@ app.use(express.static('./static')); //references static folder
 
 //code from here on referenced from lab 14
 
-const user_data_filename = 'user_data.json';
-app.use(myParser.urlencoded({ extended: true }));
-
-
 // Process login form POST and redirect to logged in page if ok, back to login page if not
 app.post("/process_login", function (request, response) {
     //if user exists, get their password
     if (typeof users_reg_data[request.body.username] != 'undefined') {
         //checking the entered password with the data
         if (request.body.password == users_reg_data[request.body.username].password) {
-            response.send(loginsuccess)//thank the user for logging in if password matches what's in the data
+            user_data.user_name = request.body.username;
+            response.redirect("./invoice.html?"+user_data.user_qty_str);
         } else {
             incorrectpswmsg = `<script> alert('Your password is incorrect.'); window.history.go(-1);</script>;</script>`
             response.send(incorrectpswmsg); //if password doesn't much, tell them it doesn't
@@ -80,8 +85,10 @@ app.post("/process_register", function (request, response) {
     //write updated object to user_data_filename
     reg_info_str = JSON.stringify(users_reg_data); //turn into a string of JSON data
     fs.writeFileSync(user_data_filename, reg_info_str);
-
-
+    user_data.user_name = username;
+    
+    regsuccessmsg =`<script> alert('Registration successful!'); window.location.href= "/invoice.html?${user_data}";</script>`;
+    response.send(regsuccessmsg);
 });
 
 var listener = app.listen(8080, () => { console.log('server started listening on port ' + listener.address().port) }); //listening on port 8080
