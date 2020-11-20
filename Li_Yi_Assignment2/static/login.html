@@ -1,0 +1,62 @@
+<script src="products.js" type="text/javascript"></script>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Pokemon Buttons</title>
+    <link href="shop-style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Quicksand" />
+</head>
+
+<!--code referenced from w3schools.com-->
+
+<body>
+    <header>
+        <h1>Surprised Pokemon Buttons</h1>
+    </header>
+    <div class="navigator">
+        <hr>
+        <div class="navbuttons">
+            <a href="./index.html"><button class="nav">Home</button></a>
+            <a href="./shop.html"><button class="nav">Products</button></a>
+            <a href="./login.html"><button class="nav">Log In</button></a>
+            <a href="./register.html"><button class="nav">Register</button></a>
+        </div>
+        <hr>
+    </div>
+    <div>
+        <main>
+            <div class="registerpage">
+                <h1>Sign In</h1>
+                <hr>
+            </div>
+            <form action="/process_login" method="POST">
+                <div class="loginform">
+
+                    <label for="username"><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" name="username" id="username" required>
+
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="password" id="password" required>
+                </div>
+                <hr><br>
+                <button type="submit" class="registersubmit">Sign In</button>
+            </form>
+            <div class="registerpage">
+                <div class="container signin">
+                    <p>Don't have an account? <a href="./register.html">Register</a>
+                    </p>
+                </div>
+            </div>
+        </main>
+    </div>
+    <hr>
+    <footer>
+        <h2>
+            A fun gift for anyone!
+        </h2>
+    </footer>
+</body>
+
+</html>
