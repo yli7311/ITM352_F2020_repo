@@ -7,6 +7,12 @@ var products = require('./static/products.js').products; //loads products.js fil
 var querystring = require('qs'); 
 const fs = require('fs'); //loads fs module
 
+//records request in the console or all request methods
+app.all('*', function (request, response, next) {
+    console.log(request.method + ' to path ' + request.path);
+    next();
+});
+
 app.use(myParser.urlencoded({ extended: true }));
 
 //checks for valid submission, redirect to invoice page with submitted data if true, give error message if it is not
@@ -28,7 +34,7 @@ app.post("/process_form", function (request, response) {
         }
         const stringified = querystring.stringify(POST); //stringify the the post data 
         if (hasvalidquantities == true && hasquantities == true) {
-            response.redirect("./login.html?"+stringified); //redirect to invoice page with entered data if quantities are valid
+            response.redirect("./invoice.html?"+stringified); //redirect to invoice page with entered data if quantities are valid
         } else {
                 error_message =`<script> alert('Your quantity is invalid!'); window.history.go(-1);</script>`;
                 response.send(error_message); //send error message if quantity is invalid
@@ -46,7 +52,7 @@ function isNonNegInt(q, returnErrors = false) {
         return returnErrors ? errors : (errors.length == 0);
     }
 
-app.use(express.static('./static')); //references static folder
+app.use(express.static('./public')); //references public folder
 
 //code from here on referenced from lab 14
 
