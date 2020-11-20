@@ -4,18 +4,19 @@
 
     let params = (new URL(document.location)).searchParams;
     var quantities = [];
+    var user_name = "";
     // form was submitted so process the invoice
     if (params.has('purchase_submit')) {
         for (i = 0; i < products.length; i++) {
             if (params.has(`quantity${i}`)) {
                 a_qty = params.get(`quantity${i}`);
-                quantities[i] = a_qty;
+                quantities[i] = a_qty;   
             }
         }
+        user_name = params.get(`user_name`);
     } else {
         document.write('no form submitted');
     }
-    console.log(quantities);
 </script>
 
 <!DOCTYPE html>
@@ -125,7 +126,7 @@
 <hr>
 <footer>
     <h1>
-        Thank you for purchasing <script>document.write(user_data.user_name);</script>!
+        Thank you for purchasing, <script>document.write(user_name);</script>!
     </h1>
 </footer>
 </html>

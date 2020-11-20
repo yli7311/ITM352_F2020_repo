@@ -1,4 +1,4 @@
-//codes from lab 13 unless otherwise stated
+//codes from lab 13 unless otherwise stated, assisted by Yuu
 
 var express = require('express'); //express module
 var app = express(); //set module variable
@@ -65,7 +65,7 @@ app.post("/process_login", function (request, response) {
         //checking the entered password with the data
         if (request.body.password == users_reg_data[request.body.username].password) {
             user_data.user_name = request.body.username;
-            response.redirect("./invoice.html?"+user_data.user_qty_str);
+            response.redirect("./invoice.html?"+user_data.user_qty_str+"user_name="+user_data.user_name);
         } else {
             incorrectpswmsg = `<script> alert('Your password is incorrect.'); window.history.go(-1);</script>;</script>`
             response.send(incorrectpswmsg); //if password doesn't much, tell them it doesn't
