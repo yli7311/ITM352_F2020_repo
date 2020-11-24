@@ -4,6 +4,7 @@
  
   html {
     font-family: 'Quicksand', sans-serif;
+    color: #303349;
     background-image: url("https://static.tumblr.com/115f018d6e7e915654159bb88f77e96f/k8zu722/IDRnt3asx/tumblr_static_57abpl0gwwsg44cwss4o8gw84.png");
     background-color: white;
     font-size: 10px;
@@ -21,7 +22,6 @@
     
     font-family: 'Quicksand';
     margin: 0;
-    color: #303349;
     text-align: center;
   }
   
@@ -44,14 +44,12 @@
   p {
     font-size: 1.5rem;
     font-family: 'Quicksand';
-    color: #303349;
     text-align: center;
   }
 
   label, input {
     font-size: 1.25rem;
     font-family: 'Quicksand';
-    color: #303349;
     display: inline;
     margin-bottom: 20px;
   }
@@ -64,24 +62,25 @@
   table p {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-weight: bold;
-    color: #303349;
   }
   
   .grand_total {
     text-align: left;
-    color: #303349;
   }
 
   .welcome {
     text-align: center;
     font-size: 30px;
-    color: #303349;
   }
 
   .gotostore {
     font-family: 'Quicksand';
     font-size: 1.75rem;
     color: white;
+  }
+
+  .faq {
+    font-size: 14px;
   }
   
   /* block styling */
@@ -149,6 +148,10 @@
   .registerform, .loginform {
     width: 400px;
     margin-top: 20px;
+  }
+
+  .faq {
+    width: 500px;
   }
   
   section p {
@@ -224,6 +227,6 @@
     margin: 15px;
     margin-left: auto;
     margin-right: auto;
-    width: 490px;
+    width: 368px;
     display: block;
   }

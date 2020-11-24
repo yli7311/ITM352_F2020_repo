@@ -4,7 +4,7 @@
 
     let params = (new URL(document.location)).searchParams;
     var quantities = [];
-    var user_name = "";
+    var user_name = "Guest";
     // form was submitted so process the invoice
     if (params.has('purchase_submit')) {
         for (i = 0; i < products.length; i++) {
@@ -14,7 +14,7 @@
             }
         }
         user_name = params.get(`user_name`);
-    } else {
+    } else {o
         document.write('no form submitted');
     }
 </script>
@@ -39,8 +39,7 @@
         <div class="navbuttons">
         <a href="./index.html"><button class="nav">Home</button></a>
         <a href="./shop.html"><button class="nav">Products</button></a>
-        <a href="./login.html"><button class="nav">Log In</button></a>
-        <a href="./register.html"><button class="nav">Register</button></a>
+        <a href="./faq.html"><button class="nav">FAQ</button></a>
         </div>
         <hr>
     </div>
@@ -126,7 +125,7 @@
 <hr>
 <footer>
     <h1>
-        Thank you for purchasing, <script>document.write(user_name);</script>!
+        Thank you for your purchase, <script>document.write(user_name);</script>!
     </h1>
 </footer>
 </html>

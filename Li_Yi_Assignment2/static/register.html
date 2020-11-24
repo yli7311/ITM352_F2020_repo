@@ -35,8 +35,7 @@
         <div class="navbuttons">
             <a href="./index.html"><button class="nav">Home</button></a>
             <a href="./shop.html"><button class="nav">Products</button></a>
-            <a href="./login.html"><button class="nav">Log In</button></a>
-            <a href="./register.html"><button class="nav">Register</button></a>
+            <a href="./faq.html"><button class="nav">FAQ</button></a>
         </div>
         <hr>
     </div>
@@ -48,14 +47,17 @@
         </div>
         <form action="/process_register" method="POST">
             <div class="registerform">
+                <label for="name"><b>Full Name</b></label>
+                <input type="text" placeholder="Enter Your Full Name (Max. 30 characters)" name="name" id="name" required>
+
                 <label for="username"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="username" id="username" required>
+                <input type="text" placeholder="Enter Username (4-10 characters)" name="username" id="username" required>
 
                 <label for="email"><b>Email</b></label>
                 <input type="text" placeholder="Enter Email" name="email" id="email" required>
 
                 <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="password" id="password" required>
+                <input type="password" placeholder="Enter Password (Min. 6 characters)" name="password" id="password" required>
 
                 <label for="psw-repeat" id="passwordrepeatlabel"><b>Repeat Password</b></label>
                 <input type="password" placeholder="Repeat Password" name="passwordrepeat" id="passwordrepeat" required>        

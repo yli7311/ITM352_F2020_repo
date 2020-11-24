@@ -1,21 +1,19 @@
-//codes from lab 13 unless otherwise stated, assisted by Yuu
+//codes from lab 13 unless otherwise stated, assisted by Yuu (a friend)
 
 var express = require('express'); //express module
 var app = express(); //set module variable
 var myParser = require("body-parser"); //body parser module
-var products = require('./static/products.js').products; //loads products.js file and sets variable
 var querystring = require('qs'); 
 const fs = require('fs'); //loads fs module
+var products = require('./static/products.js').products; //loads products.js file and sets variable
 const user_data_filename = 'user_data.json';
-var user_data = {
-    "user_qty_str" : "",
-    "user_name" : "guest"
-}
-
-var data = fs.readFileSync(user_data_filename, 'utf-8');
-users_reg_data = JSON.parse(data);
+var user_qty_str = "";
 
 app.use(myParser.urlencoded({ extended: true }));
+
+//process user data from user data file 
+var data = fs.readFileSync(user_data_filename, 'utf-8');
+users_reg_data = JSON.parse(data);
 
 //checks for valid submission, redirect to invoice page with submitted data if true, give error message if it is not
 app.post("/process_form", function (request, response) {
@@ -36,7 +34,7 @@ app.post("/process_form", function (request, response) {
         }
         const stringified = querystring.stringify(POST); //stringify the the post data 
         if (hasvalidquantities == true && hasquantities == true) {
-            user_data.user_qty_str = stringified;
+            user_qty_str = stringified;
             response.redirect("./login.html?"+stringified); //redirect to invoice page with entered data if quantities are valid
         } else {
                 error_message =`<script> alert('Your quantity is invalid!'); window.history.go(-1);</script>`;
@@ -53,42 +51,80 @@ function isNonNegInt(q, returnErrors = false) {
         if (parseInt(q) != q) errors.push('Not an integer!'); //check if value is a whole number//
         return returnErrors ? errors : (errors.length == 0);
     }
-
 app.use(express.static('./static')); //references static folder
 
 //code from here on referenced from lab 14
 
-// Process login form POST and redirect to logged in page if ok, back to login page if not
+// Process login form POST and redirect to logged in page if ok, back to login page if not (writing assisted by Yuu)
 app.post("/process_login", function (request, response) {
     //if user exists, get their password
-    if (typeof users_reg_data[request.body.username] != 'undefined') {
+    submitted_username = request.body.username.toLowerCase();//turns submitted username into lowercase 
+    if (typeof users_reg_data[submitted_username] != 'undefined') {
         //checking the entered password with the data
-        if (request.body.password == users_reg_data[request.body.username].password) {
-            user_data.user_name = request.body.username;
-            response.redirect("./invoice.html?"+user_data.user_qty_str+"&user_name="+user_data.user_name);
+        if (request.body.password == users_reg_data[submitted_username].password) {
+            user_name = users_reg_data[submitted_username].name;
+            response.redirect("./invoice.html?"+user_qty_str+"&user_name="+user_name);
+            
         } else {
-            incorrectpswmsg = `<script> alert('Your password is incorrect.'); window.history.go(-1);</script>;</script>`
-            response.send(incorrectpswmsg); //if password doesn't much, tell them it doesn't
+            response.send(`<script> alert('Your password is incorrect.'); window.history.go(-1);</script>`); //if password doesn't much, tell them it doesn't and send them back
         }
     } else {
-        response.send(`ERR: User ${request.body.username} does not exist!`);
+        console.log('Invalid username: '+submitted_username);
+        response.send(`<script> alert('User ${submitted_username} does not exist!'); window.history.go(-1);</script>`) //if username does not exist, tell them it doesn't and send them back
     }
 });
 
-// process a simple register form
+// process a simple register form, regex codes borrowed from https://www.youtube.com/watch?v=vPVx-zGFh0w, https://www.rexegg.com/regex-quickstart.html, and stackoverflow (writing assisted by Yuu)
 app.post("/process_register", function (request, response) {
     // if all data is valid, write to the user_data_filea and send to invoice 
-    username = request.body.username;
-    users_reg_data[username] = {};
-    users_reg_data[username].password = request.body.password;
-    users_reg_data[username].email = request.body.email;
-    //write updated object to user_data_filename
-    reg_info_str = JSON.stringify(users_reg_data); //turn into a string of JSON data
-    fs.writeFileSync(user_data_filename, reg_info_str);
-    user_data.user_name = username;
+    const email_rgx = /^([a-zA-Z0-9 \. -]+)@([a-zA-Z0-9 \.]+).([A-Za-z]{2,3})/ //email formatting 
+    const username_rgx = /^([a-zA-Z0-9]{4,10})/ //username formatting
+    const password_rgx = /^([.]{6,})/ //password formatting
+    const name_rgx = /^([a-zA-Z]{,30})/ //name formatting
+    var errors = [];
+
+    if (request.body.name.length > 30) {
+        errors.push('Your name is too long.'); //if name is too long, push error
+    }
+    if (/^([a-zA-Z])/.test(request.body.name.match)) {} else {
+        errors.push('Your name is invalid. Please only use letters in your name.'); //if name format is invalid, push error
+    }
+    if (request.body.username.length < 4) {
+        errors.push('Your username is too short.'); //if username is too short, push error
+    }
+    if (request.body.username.length > 10) {
+        errors.push('Your username is too long.'); //if username is too long, push error
+    }
+    if (/^([a-zA-Z0-9])/.test(request.body.username.match)) {} else {
+        errors.push('Your username is invalid. Please only use letters and/or numbers in your username.'); //if username format does not match, push error
+    }
+    if (/^([a-zA-Z0-9 \. -]+)@([a-zA-Z0-9 \.]+).([A-Za-z]{2,3})/.test(request.body.email)) {} else {
+        errors.push('Your email is invalid. Please follow the proper email format.'); //if email format does not match, push error 
+    }
+    if (request.body.password.length < 6) {
+        errors.push('Your password is too short.'); //if password is too short, push error
+    }
+    if (request.body.passwordrepeat != request.body.password) {
+        errors.push('Passwords do not match.'); //if passwords do not match, push error
+    }
+
+    if (request.body.email.match(email_rgx),request.body.username.match(username_rgx),request.body.password.match(password_rgx),request.body.passwordrepeat == request.body.password){
+        username = request.body.username.toLowerCase();
+        users_reg_data[username] = {};
+        users_reg_data[username].name = request.body.name;
+        users_reg_data[username].password = request.body.password;
+        users_reg_data[username].email = request.body.email.toLowerCase();
     
-    regsuccessmsg =`<script> alert('Registration successful!'); window.location.href= "/invoice.html?${user_data}";</script>`;
-    response.send(regsuccessmsg);
+        //write updated object to user_data_filename
+        reg_info_str = JSON.stringify(users_reg_data); //turn into a string of JSON data
+        fs.writeFileSync(user_data_filename, reg_info_str);
+        
+        regsuccessmsg =`<script> alert('Registration successful!'); window.location.href= "/invoice.html?${request.body.name}";</script>`;
+        response.send(regsuccessmsg);
+    } else {
+        errormsg = `<script> alert('${errors.join(" ")}');window.history.go(-1);</script>`;
+        response.send(errormsg);
+    }
 });
 
 var listener = app.listen(8080, () => { console.log('server started listening on port ' + listener.address().port) }); //listening on port 8080
