@@ -119,12 +119,18 @@ app.post("/process_register", function (request, response) {
         reg_info_str = JSON.stringify(users_reg_data); //turn into a string of JSON data
         fs.writeFileSync(user_data_filename, reg_info_str);
         
-        regsuccessmsg =`<script> alert('Registration successful!'); window.location.href= "/invoice.html?${request.body.name}";</script>`;
+        regsuccessmsg =`<script> alert('Registration successful!'); window.location.href= "/invoice.html?${user_qty_str}&user_name=${request.body.name}";</script>`;
         response.send(regsuccessmsg);
     } else {
         errormsg = `<script> alert('${errors.join(" ")}');window.history.go(-1);</script>`;
         response.send(errormsg);
     }
+});
+
+app.post("/send_address", function (request, response) {
+    POST = request.body;
+    const stringified = querystring.stringify(POST); //stringify the the post data 
+    response.redirect("./thankyou.html?"+stringified);
 });
 
 var listener = app.listen(8080, () => { console.log('server started listening on port ' + listener.address().port) }); //listening on port 8080

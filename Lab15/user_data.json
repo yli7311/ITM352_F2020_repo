@@ -14,9 +14,8 @@
         "password": "grader",
         "email": "itm352@hawaii.edu"
     },
-    "yuu": {
-        "name": "Yuu Yuu",
-        "password": "hihihi",
-        "email": "yuu@idk.com"
+    "newuser": {
+        "password": "newpass",
+        "email": "newuser@user.com"
     }
 }

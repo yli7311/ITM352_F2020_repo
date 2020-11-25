@@ -1,17 +1,8 @@
 <script src="products.js" type="text/javascript"></script>
 <script>
-    //check if the pasespeat matche the password, referenced from Invoice WOD
-    function checkpasswordrepeat(pswrepeat, return_errors = false) {
-        errors = []; // assume no errors at first
-        if (pswrepeat != password) errors.push('<font color="red">Passwords do not match!</font>'); // check if it matches password
-        return return_errors ? errors : (errors.length == 0);
-    }
-
-    function checkPswrepeatTextbox(theTextbox) {
-        errs = checkpasswordrepeat(theTextbox.value, true);
-        if (errs.length == 0) errs = ['Repeat Password'];
-        if (theTextbox.value.trim() == '') errs = ['Repeat Password'];
-        document.getElementById('passwordrepeatlabel').innerHTML = errs;
+    // send user to shop page if there's no querystring, assisted by Yuu
+    if (params.values = 'undefined') {
+        window.location.href = "./shop.html";
     }
 </script>
 <!DOCTYPE html>
@@ -48,28 +39,38 @@
         <form action="/process_register" method="POST">
             <div class="registerform">
                 <label for="name"><b>Full Name</b></label>
-                <input type="text" placeholder="Enter Your Full Name (Max. 30 characters)" name="name" id="name" required>
+                <input type="text" placeholder="Enter Your Full Name (Max. 30 characters)" name="name" id="name"
+                    required>
 
                 <label for="username"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username (4-10 characters)" name="username" id="username" required>
+                <input type="text" placeholder="Enter Username (4-10 characters)" name="username" id="username"
+                    required>
 
                 <label for="email"><b>Email</b></label>
                 <input type="text" placeholder="Enter Email" name="email" id="email" required>
 
                 <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password (Min. 6 characters)" name="password" id="password" required>
+                <input type="password" placeholder="Enter Password (Min. 6 characters)" name="password" id="password"
+                    required>
 
                 <label for="psw-repeat" id="passwordrepeatlabel"><b>Repeat Password</b></label>
-                <input type="password" placeholder="Repeat Password" name="passwordrepeat" id="passwordrepeat" required>        
+                <input type="password" placeholder="Repeat Password" name="passwordrepeat" id="passwordrepeat" required>
             </div>
+            <input id="purchasedata" name="purchasedata" type="hidden" value=`location.search`>
             <div class="registerpage">
                 <hr><br>
                 <button type="submit" class="registersubmit">Register</button>
         </form>
-        <div class="container signin">
-            <p>Already have an account? <a href="./login.html">Sign in</a>
+        <script>
+            document.write(`
+        <div class="registerpage">
+            <div class="container signin">
+            <p>Already have an account? <a href="./login.html${location.search}">Sign in</a>
             </p>
         </div>
+        </div>`);
+        </script>
+
         </div>
     </main>
     <hr>

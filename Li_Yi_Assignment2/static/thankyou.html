@@ -1,0 +1,66 @@
+<script>
+    //Code from Invoice 4 + Assignment 1 page
+
+    let params = (new URL(document.location)).searchParams;
+    //getting address information from querystring 
+    send_name = params.get(`send_name`);
+    send_st = params.get(`send_st`);
+    send_city = params.get(`send_city`);
+    send_zip = params.get(`send_zip`);
+    send_country = params.get(`send_country`);
+    send_state = params.get(`send_state`);
+
+    // send user to shop page if there's no querystring, assisted by Yuu
+    if (params.values= 'undefined') {
+        window.location.href = "./shop.html";
+    }
+
+</script>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Pokemon Buttons</title>
+    <link href="shop-style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Quicksand" />
+</head>
+
+<body>
+    <header>
+        <h1>Surprised Pokemon Buttons</h1>
+    </header>
+    <div class="navigator">
+        <hr>
+        <div class="navbuttons">
+            <a href="./index.html"><button class="nav">Home</button></a>
+            <a href="./shop.html"><button class="nav">Products</button></a>
+            <a href="./faq.html"><button class="nav">FAQ</button></a>
+        </div>
+        <hr>
+    </div>
+    <div>
+        <main>
+            <div class="thankyou">
+                <h2><b>Thank you for your purchase!</b></h2><br><br>
+                <p><u>Your purchase will be sent to:</u></p>
+                <script>
+                    document.write(`<p>
+            ${send_name}<br>
+            ${send_st}<br>
+            ${send_city}, ${send_country} ${send_zip}<br>
+            ${send_state}</p>
+            `);
+                </script>
+            </div>
+        </main>
+    </div>
+    <hr>
+    <footer>
+        <h2>
+            A fun gift for anyone!
+        </h2>
+    </footer>
+</body>
+
+</html>

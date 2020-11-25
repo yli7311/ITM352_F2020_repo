@@ -79,7 +79,7 @@
     color: white;
   }
 
-  .faq {
+  .faq, .thankyou {
     font-size: 14px;
   }
   
@@ -148,9 +148,11 @@
   .registerform, .loginform {
     width: 400px;
     margin-top: 20px;
+    padding-left: 100px;
+    padding-right: 100px;
   }
 
-  .faq {
+  .faq, .thankyou {
     width: 500px;
   }
   
@@ -208,7 +210,7 @@
     border: 0;
   }
 
-  .nav, .registersubmit {
+  .nav, .registersubmit, .send {
     width: 100px;
     padding: 8px;
     border: 1px solid #585858;
@@ -218,7 +220,7 @@
     margin-right: 10px;
   }
 
-  .registersubmit {
+  .registersubmit, .send {
     width: 20%;
     margin-left: 40%;
   }
