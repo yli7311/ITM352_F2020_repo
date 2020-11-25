@@ -81,7 +81,8 @@ app.post("/process_register", function (request, response) {
     const username_rgx = /^([a-zA-Z0-9]{4,10})/ //username formatting
     const password_rgx = /^([.]{6,})/ //password formatting
     const name_rgx = /^([a-zA-Z]{,30})/ //name formatting
-    var errors = [];
+    var errors = []; //assume no errors
+    var username = request.body.username.toLowerCase(); //set variable username
 
     if (request.body.name.length > 30) {
         errors.push('Your name is too long.'); //if name is too long, push error
@@ -89,13 +90,16 @@ app.post("/process_register", function (request, response) {
     if (/^([a-zA-Z])/.test(request.body.name.match)) {} else {
         errors.push('Your name is invalid. Please only use letters in your name.'); //if name format is invalid, push error
     }
-    if (request.body.username.length < 4) {
+    if (username.length < 4) {
         errors.push('Your username is too short.'); //if username is too short, push error
     }
-    if (request.body.username.length > 10) {
+    if (username.length > 10) {
         errors.push('Your username is too long.'); //if username is too long, push error
     }
-    if (/^([a-zA-Z0-9])/.test(request.body.username.match)) {} else {
+    if (users_reg_data[username] != 'undefined') {
+        errors.push('This username already exists.'); //if username already exists, push error
+    }
+    if (/^([a-zA-Z0-9])/.test(username.match)) {} else {
         errors.push('Your username is invalid. Please only use letters and/or numbers in your username.'); //if username format does not match, push error
     }
     if (/^([a-zA-Z0-9 \. -]+)@([a-zA-Z0-9 \.]+).([A-Za-z]{2,3})/.test(request.body.email)) {} else {
@@ -108,18 +112,17 @@ app.post("/process_register", function (request, response) {
         errors.push('Passwords do not match.'); //if passwords do not match, push error
     }
 
-    if (request.body.email.match(email_rgx),request.body.username.match(username_rgx),request.body.password.match(password_rgx),request.body.passwordrepeat == request.body.password){
-        username = request.body.username.toLowerCase();
+    if (request.body.email.match(email_rgx),request.body.username.match(username_rgx),request.body.password.match(password_rgx),request.body.passwordrepeat == request.body.password, typeof users_reg_data[username] == 'undefined'){
         users_reg_data[username] = {};
         users_reg_data[username].name = request.body.name;
         users_reg_data[username].password = request.body.password;
         users_reg_data[username].email = request.body.email.toLowerCase();
-    
         //write updated object to user_data_filename
+
         reg_info_str = JSON.stringify(users_reg_data); //turn into a string of JSON data
         fs.writeFileSync(user_data_filename, reg_info_str);
         
-        regsuccessmsg =`<script> alert('Registration successful!'); window.location.href= "/invoice.html?${user_qty_str}&user_name=${request.body.name}";</script>`;
+        regsuccessmsg =`<script> alert('Registration successful!'); window.location.href= "/invoice.html?${user_qty_str}&user_name=${request.body.name}";</script>`; //sends alert for registration success and redirects to invoice page
         response.send(regsuccessmsg);
     } else {
         errormsg = `<script> alert('${errors.join(" ")}');window.history.go(-1);</script>`;
