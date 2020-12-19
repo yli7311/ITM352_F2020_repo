@@ -27,7 +27,7 @@ app.get("/set_cookie", function (request, response) {
 app.get("/use_cookie", function (request, response) {
     console.log(request.cookies);
     thename = 'ANONYMOUS';
-    if(typeof request.cookies["myname"] != 'undefined') {
+    if (typeof request.cookies["myname"] != 'undefined') {
         thename = request.cookies["myname"]
     }
     response.send(`Welcome to the Use Cookie page ${thename}`);
@@ -81,20 +81,27 @@ app.get("/login", function (request, response) {
 
 app.post("/process_login", function (request, response) {
     // Process login form POST and redirect to logged in page if ok, back to login page if not
-    console.log(request.body);
-    // if user exists, get their password
+    console.log(request.body); // if user exists, get their password
     if (typeof users_reg_data[request.body.username] != 'undefined') {
         if (request.body.password == users_reg_data[request.body.username].password) {
-            response.send(`Thank you ${request.body.username} for logging in.`);
+            response.send(`Thank you ${request.body.username} for loggin
+   g in.`);
+            var now = new Date();
+            if(typeof request.session["lastLogin"] != 'undefined'){
+                lastLogin = request.session["lastLogin"];}
+                else {
+                lastLogin = 'First login!';
+                }
+            console.log(`${request.body.username} logged in on ${request
+                .session.lastLogin}`);
         } else {
-            response.send(`Hey! ${request.body.password} does not match what we have for you!`);
+            response.send(`Hey! ${request.body.password} does not match
+   what we have for you!`);
+        }}
+    else {
+            response.send(`Hey! ${request.body.username} does not exist!`);
         }
-    } else {
-        response.send(`Hey! ${request.body.username} does not exist!`);
-    }
-
-});
-
+    });
 
 app.listen(8080, () => console.log(`listening on port 8080`));
 
