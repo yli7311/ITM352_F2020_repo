@@ -1,10 +1,9 @@
 <!--layout taken from storenvy cooper theme-->
-<!--online store code written by Yi-->
+<!--online store code written by Yi, assisted by Yuu and Qinshou-->
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <script src="./functions.js"></script>
 <script src="user_data.json" type="json"></script>
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
 <script>
   //referenced from assignment #3 examples
   var products;
@@ -95,8 +94,7 @@
                     `)
                   } else {
                     document.write(`
-                    <!--<li><a href="login.html">Welcome back</a></li>-->
-                    <li><a href="register.html">${user_name}!</a></li>
+                    <li>Hi ${user_name}!</li>
                     <li><a href="sign_out">▶ Sign out</a></li>
                     `)
                   }

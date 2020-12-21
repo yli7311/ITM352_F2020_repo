@@ -1,11 +1,10 @@
 <!--layout taken from storenvy cooper theme-->
-<!--online store code written by Yi-->
+<!--online store code written by Yi, assisted by Yuu and Qinshou-->
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
   <script src="./functions.js"></script>
   <script src="user_data.json" type="json"></script>
-  <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
   <script>
     //referenced from assignment #3 examples
     var products;
@@ -74,26 +73,18 @@
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Comfortaa|Dosis|Raleway">
 
   <script>
+    //function to remove item from shopping cart, writing assisted by Qinshou
     function onRemoveItems(btn) {
       let category = btn.getAttribute("category"), index = btn.getAttribute("index");
-      // console.log(category, index);
-      // console.log(shopping_cart)
-      shopping_cart[category][index] = 0;
+      shopping_cart[category][index] = 0; //change quantity to 0
       window.location.href = `/add_to_cart?category=${category}&${shopping_cart[category].map(n => "quantity[]=" + n).join("&")}`;
-      // let ajax = new XMLHttpRequest();
-      // ajax.open("GET", "/add_to_cart?category=Rabbits&quantity[]=7&quantity[]=0&quantity[]=0&quantity[]=0", true);
-      // ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      // ajax.onreadystatechange = function() {
-      //   if (ajax.readyState != 4 && ajax.status != 200) return;
-      //   console.log(ajax.responseText);
-      // };
-      // ajax.send();
     }
+    //function to edit cart quantity, writing assisted by Qinshou
     function onQuantityChange(btn, isAdd) {
       let category = btn.getAttribute("category"), index = btn.getAttribute("index");
-      if (isAdd)
+      if (isAdd) //change quantity by +1
         ++shopping_cart[category][index];
-      else --shopping_cart[category][index];
+      else --shopping_cart[category][index]; //change quantity by -1
       window.location.href = `/add_to_cart?category=${category}&${shopping_cart[category].map(n => "quantity[]=" + n).join("&")}`;
     }
   </script>
@@ -122,8 +113,7 @@
                     `)
                   } else {
                     document.write(`
-                    <!--<li><a href="login.html">Welcome back</a></li>-->
-                    <li><a href="register.html">${user_name}!</a></li>
+                    <li>Hi ${user_name}!</li>
                     <li><a href="sign_out">▶ Sign out</a></li>
                     `)
                   }
