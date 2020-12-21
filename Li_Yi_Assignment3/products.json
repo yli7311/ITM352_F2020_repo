@@ -1,0 +1,93 @@
+{
+  "Rabbits": [
+    {
+      "name": "Pink Rabbit",
+      "price": 1.50,
+      "image": "./product_images/pink_rabbit.png"
+    },
+    {
+      "name": "Yellow Rabbit",
+      "price": 1.50,
+      "image": "./product_images/yellow_rabbit.png"
+    },
+    {
+      "name": "Blue Rabbit",
+      "price": 1.50,
+      "image": "./product_images/blue_rabbit.png"
+    },
+    {
+      "name": "Gray Rabbit",
+      "price": 1.50,
+      "image": "./product_images/gray_rabbit.png"
+    }
+  ],
+
+  "Cats": [
+    {
+      "name": "Orange Cat",
+      "price": 1.50,
+      "image": "./product_images/orange_cat.png"
+    },
+    {
+      "name": "Purple Cat",
+      "price": 1.50,
+      "image": "./product_images/purple_cat.png"
+    },
+    {
+      "name": "Green Cat",
+      "price": 1.50,
+      "image": "./product_images/green_cat.png"
+    },
+    {
+      "name": "Navy Cat",
+      "price": 1.50,
+      "image": "./product_images/navy_cat.png"
+    }
+  ],
+
+  "Dogs": [
+    {
+      "name": "Red Dog",
+      "price": 1.50,
+      "image": "./product_images/red_dog.png"
+    },
+    {
+      "name": "Magenta Dog",
+      "price": 1.50,
+      "image": "./product_images/magenta_dog.png"
+    },
+    {
+      "name": "Lime Dog",
+      "price": 1.50,
+      "image": "./product_images/lime_dog.png"
+    },
+    {
+      "name": "Teal Dog",
+      "price": 1.50,
+      "image": "./product_images/teal_dog.png"
+    }
+  ],
+
+  "Bears": [
+    {
+      "name": "White Bear",
+      "price": 1.50,
+      "image": "./product_images/white_bear.png"
+    },
+    {
+      "name": "Peach Bear",
+      "price": 1.50,
+      "image": "./product_images/peach_bear.png"
+    },
+    {
+      "name": "Brown Bear",
+      "price": 1.50,
+      "image": "./product_images/brown_bear.png"
+    },
+    {
+      "name": "Black Bear",
+      "price": 1.50,
+      "image": "./product_images/black_bear.png"
+    }
+  ]
+}

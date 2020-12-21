@@ -1,0 +1,526 @@
+/* CSS from Storenvy Cooper Theme */
+
+@charset "UTF-8";
+/*! normalize.css v2.1.0 | MIT License | git.io/normalize */
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+    display: block
+}
+
+[hidden] {
+    display: none
+}
+
+html {
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    color: #303349
+}
+
+body {
+    margin: 0
+}
+
+a:focus {
+    outline: thin dotted
+}
+
+a:active, a:hover {
+    outline: 0
+}
+
+h1 {
+    font-size: 2em;
+    margin: .67em 0
+}
+
+body, input, button {
+    -webkit-font-smoothing: antialiased
+}
+
+abbr[title] {
+    border-bottom: 1px dotted
+}
+
+b, strong {
+    font-weight: bold
+}
+
+dfn {
+    font-style: italic
+}
+
+hr {
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 0
+}
+
+mark {
+    background: #ff0;
+    color: #303349
+}
+
+code, kbd, pre, samp {
+    font-family: monospace, serif;
+    font-size: 1em
+}
+
+pre {
+    white-space: pre-wrap
+}
+
+q {
+    quotes: "\201C" "\201D" "\2018" "\2019"
+}
+
+small {
+    font-size: 80%
+}
+
+sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline
+}
+
+sup {
+    top: -0.5em
+}
+
+sub {
+    bottom: -0.25em
+}
+
+img {
+    border: 0
+}
+
+svg:not(:root) {
+    overflow: hidden
+}
+
+figure {
+    margin: 0
+}
+
+fieldset {
+    border: 1px solid #c0c0c0;
+    margin: 0 2px;
+    padding: .35em .625em .75em
+}
+
+legend {
+    border: 0;
+    padding: 0
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    margin: 0
+}
+
+button, input {
+    line-height: normal
+}
+
+button, select {
+    text-transform: none
+}
+
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+    -webkit-appearance: button;
+    cursor: pointer
+}
+
+button[disabled], html input[disabled] {
+    cursor: default
+}
+
+input[type="checkbox"], input[type="radio"] {
+    box-sizing: border-box;
+    padding: 0
+}
+
+input[type="search"] {
+    -webkit-appearance: textfield;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box
+}
+
+input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none
+}
+
+button::-moz-focus-inner, input::-moz-focus-inner {
+    border: 0;
+    padding: 0
+}
+
+textarea {
+    overflow: auto;
+    vertical-align: top
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 95%;
+    margin-top: 20px;
+}
+
+table tbody td {
+    padding: 5px;
+}
+
+table p {
+    font-weight: bold;
+}
+
+.shipping {
+    font-size: 11px;
+    width: 70%;
+    margin-left: 12%;
+    margin-top: 10px;
+}
+
+.qtychange {
+    border: 0;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.checkout {
+    margin-left: 145px;
+    width: 175px;
+    padding: 10px;
+    background-color: #303349;
+    border: 0;
+    font-size: 1rem;
+    color: white;
+}
+
+* {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+#container {
+    width: 100%;
+    margin: 0 auto
+}
+
+.row {
+    margin-left: -3.164556962%;
+    *zoom: 1
+}
+
+.row:before, .row:after {
+    display: table;
+    line-height: 0;
+    content: ""
+}
+
+.row:after {
+    clear: both
+}
+
+#main, .main {
+    width: 71.835443038%;
+    margin-left: 3.164556962%;
+    float: left;
+    min-height: 1px
+}
+
+#sidebar, .sidebar {
+    width: 20.5%;
+    margin-left: 4.5%;
+    float: left;
+    min-height: 1px
+}
+
+#container {
+    width: 750px
+}
+
+#main .row {
+    margin-left: -4.2194092827%;
+    *zoom: 1
+}
+
+#main .row:before, #main .row:after {
+    display: table;
+    line-height: 0;
+    content: ""
+}
+
+#main .row:after {
+    clear: both
+}
+
+#content {
+    padding: 0 31px 31px
+}
+
+#container {
+    background-color: #fff
+}
+
+#container a:link, #container a:visited, #container a:active, #container a:hover {
+    text-decoration: none
+}
+
+hr {
+    border-bottom: 1px dotted;
+    border-top: 0;
+    margin: 9px 0;
+    opacity: .4
+}
+
+#content {
+    font-size: 14px
+}
+
+#content h1 {
+    font-size: 26px;
+    font-weight: normal;
+    margin-top: 0
+}
+
+#content h2 {
+    font-weight: normal;
+    font-size: 22px;
+    margin-top: 0
+}
+
+#content p {
+    line-height: 1.4em
+}
+
+#content #success {
+    color: #71b9a1;
+    background-color: #dcf0e8;
+    background-image: url("/assets/themes/cooper/icon_success_check.png");
+    margin: 0 0 20px
+}
+
+#content #error {
+    color: #de4141;
+    background-color: #f6cece;
+    background-image: url("/assets/themes/cooper/icon_error_x.png");
+    margin: 0 0 20px
+}
+
+#content .flash-message {
+    padding: 20px 20px 20px 50px;
+    background-position: 20px;
+    background-repeat: no-repeat
+}
+
+#content .flash-message p {
+    margin: 0;
+    font-weight: bold;
+    font-size: 16px
+}
+
+#content.pad-top {
+    padding-top: 30px
+}
+
+a.button, button.button, input.button {
+    padding: 14px 2px;
+    color: #fff;
+    background-color: #333;
+    text-decoration: none;
+    line-height: 1;
+    outline: 0;
+    border: 0;
+    font-weight: bold;
+    text-align: center
+}
+
+a {
+    transition: color 100ms
+}
+
+#header #store_info .store_name {
+    font-size: 38px;
+    font-weight: 500;
+    padding: 30px;
+    margin: 0;
+    text-align: center
+}
+
+#header #store_info .store_name a, #header #store_info .store_name a:hover {
+    text-decoration: none
+}
+
+#header h5.store_location {
+    font-size: 16px;
+    font-weight: normal
+}
+
+#sidebar a {
+    font-size: 14px;
+    margin: 6px 0;
+    font-weight: 500
+}
+
+#sidebar a:hover {
+    text-decoration: none
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0
+}
+
+#sidebar ul li {
+    margin: 6px 0
+}
+
+#sidebar #user_login_register {
+    font-size: 18px;
+}
+
+#sidebar hr {
+    width: 127px
+}
+
+#main h1, #main h2, main {
+    color: #414141
+}
+
+#footer {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0;
+    padding: 20px 31px 30px;
+    margin-bottom: 60px;
+    border-top: 1px dotted
+}
+
+#footer #footer_info {
+    word-wrap: break-word;
+    line-height: 20px
+}
+
+#footer #footer_info .footer-medium {
+    font-weight: 300
+}
+
+#footer #footer_info .footer-small {
+    font-weight: 300;
+    font-size: 12px
+}
+
+.clearfix {
+    *zoom: 1
+}
+
+ul.products {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    padding: 0;
+    list-style: none
+}
+
+#main #title.category-title {
+    margin: 0 0 15px;
+    font-size: 26px
+}
+
+li.product {
+    font-size: 14px;
+    margin: 1.5em;
+    margin-right: 2em;
+    position: relative;
+    text-align: left;
+    transition: opacity 400ms;
+    float: left;
+    width: 40%;
+    height: 300px;
+}
+
+li.product .product_name {
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    margin: 5px 0
+}
+
+li.product img.product-photo {
+    width: 100%
+}
+
+li.product .flags {
+    position: absolute;
+    top: 10px;
+    right: -5px;
+    float: right;
+    clear: right;
+    line-height: 1;
+    padding: 8px;
+    color: #fff;
+    text-transform: uppercase;
+    background-color: #303349;
+    font-size: 12px;
+    font-weight: bold
+}
+
+
+.strikethrough {
+    text-decoration: line-through
+}
+
+.spacer {
+    height: 40px
+}
+
+.add_cart {
+    width: 175px;
+    padding: 10px;
+    margin-left: 171px;
+    background-color: #303349;
+    border: 0;
+    font-size: 1rem;
+    color: white;
+  }
+
+.quantity_input_box {
+    width: 100%;
+}
+
+tr.cart {
+    width: 100%;
+    margin: 20px;
+    margin-bottom: 30px;
+  }
+
+.registerpage, .loginpage {
+    width: 100%;
+    padding-top: 20px;
+  }
+
+.loginform, .registerform {
+    display: inline;
+    justify-content: center;
+}
+
+.registersubmit, .loginsubmit, .send {
+    width: 20%;
+    padding: 8px;
+    border: 1px solid #585858;
+    background-color: white;
+    border-radius: 20px;
+    margin-left: 40%;
+}

@@ -1,32 +1,131 @@
-<!-- Author of the code: Yi Li -->
-<!-- This code is written for an online shop site which transfers data from one page to the next using the POST method -->
+<!--layout taken from storenvy cooper theme-->
+<!--online store code written by Yi-->
 <!DOCTYPE html>
-<html>
+<html lang="en" class="no-js">
+<script src="./functions.js"></script>
+<script src="user_data.json" type="json"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+<script>
+  //referenced from assignment #3 examples
+  var products;
+  loadJSON('get_products_data', function (response) {
+    // Parsing JSON string into object
+    products = JSON.parse(response);
+  });
+
+  var user_name;
+  loadJSON('get_user', function (response) {
+    // Parsing JSON string into object
+    user_name = JSON.parse(response);
+  });
+
+  //checking quantity input, code from Invoice WOD
+  function isNonNegInt(q, return_errors = false) {
+    errors = []; // assume no errors at first
+    if (q == '') q = 0; // handle blank inputs as if they are 0
+    if (Number(q) != q) errors.push('<font color="red">Not a number!</font>'); // Check if string is a number value
+    else if (q < 0) errors.push('<font color="red">Negative value!</font>'); // Check if it is non-negative
+    else if (parseInt(q) != q) errors.push('<font color="red">Not an integer!</font>'); // Check that it is an integer
+    return return_errors ? errors : (errors.length == 0);
+  }
+
+  //checking quantity input, code from Assignment 1 page
+  function checkQuantityTextbox(theTextbox) {
+    errs = isNonNegInt(theTextbox.value, true);
+    if (errs.length == 0) errs = ['Quantity'];
+    if (theTextbox.value.trim() == '') errs = ['Quantity'];
+    document.getElementById(theTextbox.name + '_label').innerHTML = errs.join(", ");
+  }
+
+  var total = 0;
+  //loading cart data, code referenced from assignment #3 examples
+  loadJSON('get_cart', function (response) {
+    // Parsing JSON string into object
+    shopping_cart = JSON.parse(response);
+    for (pk in shopping_cart) {
+      console.log(shopping_cart);
+      total += shopping_cart[pk].reduce((a, b) => a + b);
+    }
+  });
+
+  let params = (new URL(document.location)).searchParams;
+  var this_category = params.get(`category`); //get category value from param
+  if (this_category > products.length) {
+    window.location.href = "./index.html"; //if category is undefined (no category value in param), send the user to shop-all
+  }
+
+</script>
 
 <head>
-    <meta charset="utf-8">
-    <title>Pokemon Buttons</title>
-    <link href="shop-style.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Quicksand" />
+  <meta charset="utf-8">
+
+  <title>✦ A Little Sticker Shop ✦</title>
+
+  <!--css sheet-->
+  <link href="styles.css" rel="stylesheet" />
+
+  <!--background image-->
+  <style type="text/css" media="screen">
+    body {
+      background-image: url(https://dpegb9ebondhq.cloudfront.net/background_images/900833/tumblr_inline_mp6g7fletV1qz4rgp_original.png);
+    }
+  </style>
+
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Comfortaa|Dosis|Raleway">
 </head>
 
-<body>
-    <header>
-        <h1>Surprised Pokemon Buttons</h1>
-    </header>
-    <div class="navigator">
-        <hr>
-        <div class="navbuttons">
-            <a href="./index.html"><button class="nav">Home</button></a>
-            <a href="./shop.html"><button class="nav">Products</button></a>
-            <a href="./faq.html"><button class="nav">FAQ</button></a>
+<body id="home-page" class="home theme">
+  <div id="wrapper">
+    <div id="container">
+      <div id="header">
+        <div id="store_info">
+          <h1 class="store_name"><a href="/">✦ A Little Sticker Shop ✦</a></h1>
         </div>
-        <hr>
-    </div>
-    <div>
-        <main>
-            <div class="faq">
-            <b>Where is the store based?</b><br>
+      </div><!-- end #header -->
+      <div id="content">
+        <div class="row">
+          <div id="sidebar">
+            <div class="sidebar-wrapper">
+              <ul id="user_login_register">
+                <!-- <li><a href="login.html">▶ Log In</a></li>
+                <li><a href="register.html">▶ Register</a></li> -->
+                <script>
+                  if(typeof user_name == 'undefined') {
+                    document.write(`
+                    <li><a href="login.html">▶ Log In</a></li>
+                    <li><a href="register.html">▶ Register</a></li>
+                    `)
+                  } else {
+                    document.write(`
+                    <!--<li><a href="login.html">Welcome back</a></li>-->
+                    <li><a href="register.html">${user_name}!</a></li>
+                    <li><a href="sign_out">▶ Sign out</a></li>
+                    `)
+                  }
+                </script>
+              </ul>
+              <hr />
+              <ul id="nav">
+                <script>
+                  nav_bar('', products);
+                </script>
+              </ul>
+              <hr />
+              <ul id="buttons">
+                <li><a href="./cart.html">▶ Cart (
+                    <script>document.write(`${total} `)</script>)
+                  </a></li>
+              </ul>
+              <hr />
+              <ul id="buttons">
+                <li><a href="./faq.html">▶ FAQ</a></li>
+              </ul>
+
+            </div><!-- end .sidebar-wrapper -->
+          </div><!-- end #sidebar -->
+
+          <div id="main">
+            <br><br><b>Where is the store based?</b><br>
             Honolulu, HI<br><br>
 
             <b>Do you accept orders placed outside of the US?</b><br>
@@ -37,18 +136,21 @@
             No returns or refunds accepted.<br><br>
 
             <b>How long will it take to receive my order?</b><br>
-            Orders are sent out once (sometimes twice) a week, usually on a Saturday or Tuesday.<br>
             Once shipped most domestic orders take anywhere from 2 to 10 business days to arrive depending on the efficiency of your local postal service. International shipping delivery times may vary between 2 and 12
             weeks.
-            </div>
-        </main>
-    </div>
-    <hr>
-    <footer>
-        <h2>
-            A fun gift for anyone!
-        </h2>
-    </footer>
+          </div><!-- end #main-->
+        </div>
+      </div><!-- end #content -->
+      <div id="footer">
+        <div id="footer_info">
+          <span class="footer-medium">Honolulu, HI</span><br />
+          <span class="footer-small">&copy; ✦ A Little Sticker Shop ✦ 2020</span>
+        </div><!-- end #footer_info -->
+        <div class="clearfix"></div>
+      </div><!-- end footer -->
+    </div><!-- end #container -->
+  </div><!-- end #wrapper -->
+  <div class="clearfix"></div>
 </body>
 
 </html>

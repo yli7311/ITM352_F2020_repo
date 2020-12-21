@@ -1,4 +1,4 @@
- /* Code referenced from SmartPhoneProducts */
+ /* Shop layout from Storenvy Cooper Theme */
  
   /* General */
  
@@ -231,4 +231,9 @@
     margin-right: auto;
     width: 368px;
     display: block;
+  }
+
+  .shop_page_button {
+    background: white;
+    border: 0;
   }
